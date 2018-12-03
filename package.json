@@ -1,0 +1,24 @@
+{
+  "author": "Cloudinary <info@cloudinary.com>",
+  "name": "cloudinary-live-stream-sdk",
+  "description": "Cloudinary sdk for live video stream integration",
+  "homepage": "http://cloudinary.com",
+  "license": "MIT",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "parcel build lib/index.js --out-dir dist"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.5",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "parcel-bundler": "^1.10.3",
+    "parcel-plugin-bundle-visualiser": "^1.2.0"
+  },
+  "files": [
+    "dist/index.js"
+  ]
+}
