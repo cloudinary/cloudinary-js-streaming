@@ -1,13 +1,17 @@
 {
   "author": "Cloudinary <info@cloudinary.com>",
-  "name": "cloudinary-live-stream-sdk",
-  "description": "Cloudinary sdk for live video stream integration",
+  "name": "cloudinary-live-stream",
+  "description": "Cloudinary NPM for integrating live video streaming",
   "homepage": "http://cloudinary.com",
   "license": "MIT",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudinary/cloudinary-live-stream-js.git"
+  },
   "scripts": {
-    "build": "parcel build lib/index.js --out-dir dist"
+    "build": "parcel build src/index.js --out-dir dist"
   },
   "dependencies": {
     "es6-promise": "^4.2.5",
@@ -19,6 +23,8 @@
     "parcel-plugin-bundle-visualiser": "^1.2.0"
   },
   "files": [
-    "dist/index.js"
-  ]
+    "dist/index.js",
+    "dist/index.map"
+  ],
+  "private": true
 }

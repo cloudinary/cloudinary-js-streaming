@@ -1,22 +1,27 @@
-Cloudinary Live-stream SDK 
-==========================
+Cloudinary Live-stream 
+======================
 
 This sdk provides easy integration with Cloudinary's live video streaming capabilities.
 
 ## Setup ######################################################################
 
-```npm install cloudinary-live-stream ```
+```npm install cloudinary-live-stream```
 
 ## Usage ######################################################################
 
 ```javascript
-import [placeholder]
-.
-.
-.
-placeholder.default({
- cloudName: [your-cloud-name],
-            uploadPreset: [your-live-stream-enabled-upload-preset],
+import initLiveStream from 'cloudinary-live-stream'
+
+// ...
+
+const cloudName = [your-cloud-name];
+const uploadPreset = [your-upload-preset];
+
+// ...
+
+initLiveStream({
+ cloudName: cloudName,
+            uploadPreset: uploadPreset,
             debug: "all",
             hlsTarget: true,
             fileTarget: true,
@@ -40,7 +45,7 @@ placeholder.default({
   let liveStreamLibrary = result;
   
   // Extract public id from result to share (necessary to watch the stream):
-  currPublicId = result.response["public_id"];
+  let publicId = result.response["public_id"];
 })
 ```
 

@@ -4,5 +4,6 @@ bower_components/
 .DS_Store
 .env
 bin
+dist
 *.map
 !lib

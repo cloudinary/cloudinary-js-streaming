@@ -72,9 +72,8 @@ const buildRequest = (options) => {
  * @param options   cloudName, uploadPreset, debug, dependencies, events }
  * @returns {*|{}}
  */
-const createLiveStreaming = (options) => {
-    // TODO cldtest?
-    const opaqueId = "cldtest-"+Janus.randomString(12);
+const initLiveStream = (options) => {
+    const opaqueId = "cld-"+Janus.randomString(12);
 
     let janus = null;
     let cld = null;
@@ -254,7 +253,6 @@ const createLiveStreaming = (options) => {
               reject("  -- Error attaching plugin...", error);
             },
 
-            // TODO what is this
             consentDialog: function (on) {
               Janus.debug("Consent dialog should be " + (on ? "on" : "off") + " now");
             },
@@ -322,4 +320,4 @@ const createLiveStreaming = (options) => {
     }
   };
 
-export default createLiveStreaming;
+export default initLiveStream;
