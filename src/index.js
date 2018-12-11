@@ -184,9 +184,6 @@ const initLiveStream = (options) => {
               "resource-uri": "video/upload/" + publicId
             };
             cld.send({"message": body, "jsep": jsep});
-
-            //var deliveryURL = getDeliveryUrl(result.public_id);
-            //$("#broadcast-link").attr("href", deliveryURL).text(deliveryURL);
           },
           error: function(error) {
             Janus.error("WebRTC error...", error);
@@ -199,6 +196,10 @@ const initLiveStream = (options) => {
       cld.send({message: {"request": "stop"}});
       cld.hangup();
     };
+
+    let attach = function (videoView, stream) {
+      Janus.attachMediaStream(videoView, stream);
+    }
 
     return new Promise(function (resolve, reject) {
         let janusOptions = {
@@ -233,7 +234,7 @@ const initLiveStream = (options) => {
 
       return response.json();
     }).then((json) => {
-      return {response: json, start, stop};
+      return {response: json, start, stop, attach};
     });
 
     function buildJanus(resolve, reject) {
