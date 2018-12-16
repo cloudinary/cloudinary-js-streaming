@@ -17,6 +17,7 @@ import initLiveStream from 'cloudinary-live-stream'
 const cloudName = [your-cloud-name];
 const uploadPreset = [your-upload-preset];
 let liveStreamLibrary;
+
 // ...
 
 initLiveStream({
@@ -36,7 +37,7 @@ initLiveStream({
                   // user code
                 },
                 local_stream: function (stream) {
-                  // user code, typically attaching the stream to a video view using Janus helpers:
+                  // user code, typically attaching the stream to a video view:
                   liveStreamLibrary.attach($("#thevideo").get(0), stream);
                 }
             }
@@ -44,8 +45,12 @@ initLiveStream({
   // keep handle to instance to start/stop streaming 
   liveStreamLibrary = result;
   
+  
   // Extract public id from result to share (necessary to watch the stream):
   let publicId = result.response["public_id"];
+  
+  // start streaming:
+  liveStreamLibrary.start(publicId);
 })
 ```
 

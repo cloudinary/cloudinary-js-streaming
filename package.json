@@ -5,27 +5,29 @@
   "homepage": "http://cloudinary.com",
   "license": "MIT",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "dist/cloudinary-live-stream.js",
+  "scripts": {
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cloudinary/cloudinary-live-stream-js.git"
   },
-  "scripts": {
-    "build": "parcel build src/index.js --out-dir dist"
-  },
   "dependencies": {
     "es6-promise": "^4.2.5",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "babel-preset-env": "^1.5.2",
-    "babel-core": "^6.25.0",
-    "parcel-bundler": "^1.10.3",
-    "parcel-plugin-bundle-visualiser": "^1.2.0"
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.0",
+    "babel-loader": "^8.0.4",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
   },
   "files": [
-    "dist/index.js",
-    "dist/index.map"
+    "dist/cloudinary-live-stream.js",
+    "dist/cloudinary-live-stream.js.map"
   ],
-  "private": false
+  "private": true
 }
