@@ -68,9 +68,16 @@ const buildRequest = (options) => {
 };
 
 /**
+ * Initializes the live video stream
  *
- * @param options   cloudName, uploadPreset, debug, dependencies, events }
- * @returns {*|{}}
+ * @private
+ * @param {object} options Configuration options
+ * @param {string} options.cloudName (required) The cloud name of the account for upstream
+ * @param {string} options.uploadPreset (required) Upload preset for video upload (with live stream enabled)
+ * @param {number} options.bandwidth Bitrate used for upstream (default is 1Mbit)
+ * @param {object} options.events Events listener object.
+ *
+ * @return {object} Promise returning the initialization results (public id) and handles to start/stop the streaming.
  */
 const initLiveStream = (options) => {
   const opaqueId = "cld-" + Janus.randomString(12);
@@ -83,13 +90,13 @@ const initLiveStream = (options) => {
   let uploadPreset = null;
 
   let started = false;
-  let bandwidth = 1024 * 1024;
   let recording = false;
   let recordingId = null;
   let events = null;
 
   options = options || {};
 
+  let bandwidth = options.bandwidth || 1 * 1024 * 1024; // default bandwidth 1Mbit.
   cloudName = options.cloudName;
   uploadPreset = options.uploadPreset;
   events = options.events;
@@ -161,6 +168,12 @@ const initLiveStream = (options) => {
     }
   };
 
+  /**
+   * Starts the live video streaming.
+   *
+   * @param {string} publicId The public id of the video resource generated. This is the public-id returned from the
+   *                          initLiveStream function.
+   */
   let start = function (publicId) {
     // before, after, during recording
     cld.send({
@@ -173,7 +186,7 @@ const initLiveStream = (options) => {
 
     cld.createOffer(
       {
-        // By default, it"s sendrecv for audio and video...
+        // By default, it's sendrecv for audio and video...
         media: {video: "hires"},
         success: function (jsep) {
           Janus.debug("Got SDP!");
@@ -192,6 +205,9 @@ const initLiveStream = (options) => {
       });
   };
 
+  /**
+   * Stops the live streaming
+   */
   let stop = function () {
     cld.send({message: {"request": "stop"}});
     cld.hangup();
