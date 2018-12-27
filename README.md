@@ -30,7 +30,7 @@ import initLiveStream from 'cloudinary-live-stream'
 
 // ...
 
-// configure your cloud name and the live-stream enabled upload-prest:
+// configure your cloud name and the live-stream enabled upload-preset:
 const cloudName = [your-cloud-name];
 const uploadPreset = [your-upload-preset];
 let liveStreamLibrary;
