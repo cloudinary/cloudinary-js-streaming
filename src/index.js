@@ -179,7 +179,7 @@ const initLiveStream = (options) => {
     cld.send({
       "message": {
         "request": "configure",
-        "video-bitrate-max": bandwidth, // a quarter megabit
+        "video-bitrate-max": bandwidth,
         "video-keyframe-interval": 5000, // 5 seconds
       }
     });

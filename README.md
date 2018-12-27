@@ -6,13 +6,13 @@ Easily upload images and videos to the cloud. Automatically perform smart resizi
 without installing any complex software. 
 Cloudinary offers comprehensive APIs and administration capabilities and is easy to integrate with any web application,
 existing or new.
-Cloudinary provides URL and HTTP based APIs that can be easily integrated with any Web development framework.
 
 Video live-stream 
 =================
 
 Cloudinary provides an end-to-end live video streaming solution, with on the fly video effects and transformations.
-This SDK enables integration of live-streaming capabilities into any website.
+Once a video is captured and streamed through this library, A Cloudinary video resource url is generated.
+The url can be used to view the live stream using any supported video player.
 
 ## Setup ######################################################################
 
@@ -64,8 +64,9 @@ initLiveStream({
   liveStreamLibrary = result;
   
   
-  // Extract public id from result to share (necessary to watch the stream):
-  let publicId = result.response["public_id"];
+  // Extract public id and url from result (publish the url for people to watch the stream):
+  let publicId = result.response.public_id;
+  let url = result.response.secure_url;
   
   // start the streaming:
   liveStreamLibrary.start(publicId);
