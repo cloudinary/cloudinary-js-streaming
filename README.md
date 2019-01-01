@@ -11,20 +11,48 @@ Video live-stream
 =================
 
 Cloudinary provides an end-to-end live video streaming solution, with on the fly video effects and transformations.
-Once a video is captured and streamed through this library, A Cloudinary video resource url is generated.
-The url can be used to view the live stream using any supported video player.
-
+When using the library in your website this is what happens:
+1. Video is streamed from the device's camera.
+2. The video is up-streamed through Cloudinary, providing the streaming user with a Cloudinary public id and resource
+ url of the stream.
+3. The stream is now publicly available through that url, and can be fed into any streaming-supported video player.
+4. If any transformations and effects were added to the stream (during configuration, see below) all the viewers will
+see the modified stream.
 ## Setup ######################################################################
 
-```npm install cloudinary-live-stream```
+1. Sign up for a [free account](https://cloudinary.com/users/register/free).
 
-Sign up for a [free account](https://cloudinary.com/users/register/free).
+2. Create an upload preset [here](https://cloudinary.com/console/upload_presets/new), and enable 
+the ****live-streaming**** setting. This is also the place to add any wanted effects and transformations under the 
+'Incoming transformations' section.
 
-After registering, you'll need to create an upload preset [here](https://cloudinary.com/console/upload_presets/new), 
-and enable the ****live-streaming**** setting.
+3. fetch the library from npm:
+
+    ```npm install cloudinary-live-stream```
 
 ## Usage ######################################################################
 
+After completing the setup, import the library and initialize it. There are two required parameters:
+* cloudName - this is the cloud name assigned to you when creating the Cloudinary free account.
+* uploadPreset - This is the name of the upload preset created in step two of the setup.
+
+There are several optional parameters:
+* `debug`: Log level, one of ```['trace', 'debug', 'vdebug', 'log', 'warn', 'error']```. pass in ```'all'``` to print all
+ messages.
+* `bandwidth`: Bandwith, in bits. Default is 1Mbit/s.
+* `hlsTarget`: `[true/false]`
+* `fileTarget`: `[true/false]`
+* `facebookUri`: A Facebook streaming URI used to direct the stream to facebook. 
+Supplied by facebook when configuring Facebook streaming.
+* `youtubeUri`: A Youtube streaming URI used to direct the stream to Youtube. Supplied by youtube when configuring
+ Youtube streaming.
+* `events`: callback for events, supporting the following functions:
+    * `start`: Called when the streaming starts. Includes the recording Id. 
+    * `stop`: Called when the streaming stops. Includes the recording Id.
+    * `error`: Called when the library enoucnteres an error. The error message is included in the callback.
+    * `local_stream`: Called when the stream is available locally (stream is provided in the callback). This can be used 
+    to display to the user his own streaming as it up-streams.
+    
 ```javascript
 import initLiveStream from 'cloudinary-live-stream'
 
@@ -72,3 +100,30 @@ initLiveStream({
   liveStreamLibrary.start(publicId);
 })
 ```
+
+## Additional resources ##########################################################
+
+Additional resources are available at:
+
+* [Website](https://cloudinary.com)
+* [Interactive demo](https://demo.cloudinary.com/live)
+* [Documentation](https://cloudinary.com/documentation)
+* [Knowledge Base](https://support.cloudinary.com/hc/en-us)
+* [Video transformations documentation](https://cloudinary.com/documentation/video_manipulation_and_delivery)
+
+## Support
+
+You can [open an issue through GitHub](https://github.com/cloudinary/cloudinary-live-stream-js/issues).
+
+Contact us [https://cloudinary.com/contact](https://cloudinary.com/contact)
+
+Stay tuned for updates, tips and tutorials: [Blog](https://cloudinary.com/blog), [Twitter](https://twitter.com/cloudinary), [Facebook](https://www.facebook.com/Cloudinary).
+
+## Join the Community ##########################################################
+
+Impact the product, hear updates, test drive new features and more! Join [here](https://www.facebook.com/groups/CloudinaryCommunity).
+
+
+## License #######################################################################
+
+Released under the MIT license.
