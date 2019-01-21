@@ -49,7 +49,7 @@ Supplied by facebook when configuring Facebook streaming.
 * `events`: callback for events, supporting the following functions:
     * `start`: Called when the streaming starts. Includes the recording Id. 
     * `stop`: Called when the streaming stops. Includes the recording Id.
-    * `error`: Called when the library enoucnteres an error. The error message is included in the callback.
+    * `error`: Called when the library encounters an error. The error message is included in the callback.
     * `local_stream`: Called when the stream is available locally (stream is provided in the callback). This can be used 
     to display to the user his own streaming as it up-streams.
     
