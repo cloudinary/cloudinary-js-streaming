@@ -29,5 +29,5 @@
     "dist/cloudinary-live-stream.js",
     "dist/cloudinary-live-stream.js.map"
   ],
-  "private": true
+  "private": false
 }
