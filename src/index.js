@@ -79,27 +79,19 @@ const buildRequest = (options) => {
  *
  * @return {object} Promise returning the initialization results (public id) and handles to start/stop the streaming.
  */
-const initLiveStream = (options) => {
+const initLiveStream = (options={}) => {
   const opaqueId = "cld-" + Janus.randomString(12);
 
   let janus = null;
   let cld = null;
 
-  // user configurable values:
-  let cloudName = null;
-  let uploadPreset = null;
-
   let started = false;
   let recording = false;
   let recordingId = null;
-  let events = null;
 
-  options = options || {};
-
+  // user configurable values:
   let bandwidth = options.bandwidth || 1 * 1024 * 1024; // default bandwidth 1Mbit.
-  cloudName = options.cloudName;
-  uploadPreset = options.uploadPreset;
-  events = options.events;
+  const {cloudName, uploadPreset, events} = options;
 
   const janusEventHandlers = {
     [JANUS_EVENTS.PREPARING]: (result, jsep) => {
