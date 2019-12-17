@@ -3,7 +3,9 @@ bower_components/
 .idea
 .DS_Store
 .env
+.env.*
 bin
 dist
 *.map
 !lib
+package-lock.json
