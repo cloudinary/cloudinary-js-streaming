@@ -7,23 +7,36 @@
   "version": "1.0.0-beta.0",
   "main": "dist/cloudinary-live-stream.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "test": "npm run server & mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
+    "pretest": "npm run build && npm run copybuild",
+    "posttest": "del-cli test/utils/cloudinary-live-stream.js",
+    "copybuild": "copyfiles -f \"dist/cloudinary-live-stream.js\" \"test/utils\" && echo 'build files copied.'\n",
+    "server": "http-server test"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/cloudinary/cloudinary-live-stream-js.git"
   },
   "dependencies": {
-    "es6-promise": "^4.2.5",
+    "es6-promise": "^4.2.8",
+    "janus-gateway": "git://github.com/meetecho/janus-gateway.git#v0.8.0",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.0",
-    "babel-loader": "^8.0.4",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "copyfiles": "^2.1.1",
+    "del-cli": "^3.0.0",
+    "exports-loader": "^0.7.0",
+    "mocha": "^6.2.2",
+    "puppeteer": "^2.0.0",
+    "webpack": "^4.41.3",
+    "webpack-cli": "^3.3.10"
   },
   "files": [
     "dist/cloudinary-live-stream.js",

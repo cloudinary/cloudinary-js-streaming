@@ -1,6 +1,9 @@
-import Janus from "./janus";
-import 'whatwg-fetch'
+//import Janus from "./janus";
 import 'es6-promise'
+import 'whatwg-fetch'
+
+//Use an external janus.
+const { Janus } = require('janus-gateway');
 
 const CLD_API_HOST = "api.cloudinary.com";
 const JANUS_RTC_HOST = "wss://webrtc-api.cloudinary.com/janus";
@@ -96,7 +99,7 @@ const initLiveStream = (options) => {
 
   options = options || {};
 
-  let bandwidth = options.bandwidth || 1 * 1024 * 1024; // default bandwidth 1Mbit.
+  let bandwidth = options.bandwidth || 1024 * 1024; // default bandwidth 1Mbit.
   cloudName = options.cloudName;
   uploadPreset = options.uploadPreset;
   events = options.events;
