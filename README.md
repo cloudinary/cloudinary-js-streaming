@@ -37,11 +37,11 @@ After completing the setup, import the library and initialize it. There are two 
 * uploadPreset - This is the name of the upload preset created in step two of the setup.
 
 There are several optional parameters:
-* `debug`: Log level, one of ```['trace', 'debug', 'vdebug', 'log', 'warn', 'error']```. pass in ```'all'``` to print all
+* `debug`: Log level (disabled by default), one of, or array of ```['trace', 'debug', 'vdebug', 'log', 'warn', 'error']```. pass in ```'all'``` to print all
  messages.
-* `bandwidth`: Bandwith, in bits. Default is 1Mbit/s.
-* `hlsTarget`: `[true/false]`
-* `fileTarget`: `[true/false]`
+* `bandwidth`: Bandwith, in bits. Default is 1Mbit/s (1024 * 1024).
+* `hlsTarget`: `[true/false]`, When true, will stream live using hls protocol.
+* `fileTarget`: `[true/false]`, When true, will save an mp4 file in your Cloudinary media library.
 * `facebookUri`: A Facebook streaming URI used to direct the stream to facebook. 
 Supplied by facebook when configuring Facebook streaming.
 * `youtubeUri`: A Youtube streaming URI used to direct the stream to Youtube. Supplied by youtube when configuring

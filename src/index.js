@@ -76,7 +76,7 @@ const initLiveStream = (options) => {
 
   options = options || {};
 
-  let bandwidth = options.bandwidth || 1024 * 1024; // default bandwidth 1Mbit.
+  let bandwidth = options.bandwidth || (1024 * 1024); // default bandwidth 1Mbit.
   cloudName = options.cloudName;
   uploadPreset = options.uploadPreset;
   events = options.events;
@@ -152,7 +152,7 @@ const initLiveStream = (options) => {
    * Starts the live video streaming.
    *
    * @param {string} publicId The public id of the video resource generated. This is the public-id returned from the
-   *                          initLiveStream function.
+   * initLiveStream function.
    */
   let start = function (publicId) {
     // before, after, during recording
