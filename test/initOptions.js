@@ -1,15 +1,14 @@
 /**
  * Options passed to initLiveStream()
- * .env file contains secrets, it should not be committed.
  */
 
-const {CLOUD_NAME, UPLOAD_PRESET} = require('../.env');
+const {STREAMING_SDK_CLOUD_NAME, STREAMING_SDK_UPLOAD_PRESET} = process.env;
 
 const options = {
     hlsTarget: true,
     fileTarget: true,
-  cloudName: CLOUD_NAME,
-  uploadPreset: UPLOAD_PRESET,
+  cloudName: STREAMING_SDK_CLOUD_NAME,
+  uploadPreset: STREAMING_SDK_UPLOAD_PRESET,
   //debug: 'all',
   events: {
     start: function (args) {

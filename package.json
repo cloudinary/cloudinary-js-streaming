@@ -7,8 +7,8 @@
   "version": "1.0.0-beta.1",
   "main": "dist/cloudinary-live-stream.js",
   "scripts": {
-    "build": "webpack",
-    "test": "npm run server & mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
+    "build": "node_modules/.bin/webpack",
+    "test": "npm run server & node_modules/.bin/mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
     "pretest": "npm run build && npm run copybuild",
     "posttest": "del-cli test/utils/cloudinary-live-stream.js",
     "copybuild": "copyfiles -f \"dist/cloudinary-live-stream.js\" \"test/utils\" && echo 'build files copied.'\n",
