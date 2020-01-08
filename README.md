@@ -54,7 +54,7 @@ Supplied by facebook when configuring Facebook streaming.
     to display to the user his own streaming as it up-streams.
     
 ```javascript
-import initLiveStream from 'cloudinary@/js-streaming'
+import initLiveStream from '@cloudinary/js-streaming'
 
 // ...
 
