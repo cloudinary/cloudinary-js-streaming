@@ -18,7 +18,7 @@ describe('Live Stream SDK', async () => {
         // initLiveStream is exported as default on the cloudinaryLiveStream library
         let result, isResultOk;
 
-        const initLiveStream = cloudinaryLiveStream.default;
+        const initLiveStream = cloudinaryJsStreaming.default;
         try {
           result = await initLiveStream(options);
         }

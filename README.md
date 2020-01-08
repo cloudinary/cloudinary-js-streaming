@@ -28,7 +28,7 @@ the ****live-streaming**** setting. This is also the place to add any wanted eff
 
 3. fetch the library from npm:
 
-    ```npm install cloudinary-live-stream```
+    ```npm install @cloudinary/js-streaming```
 
 ## Usage ######################################################################
 
@@ -54,7 +54,7 @@ Supplied by facebook when configuring Facebook streaming.
     to display to the user his own streaming as it up-streams.
     
 ```javascript
-import initLiveStream from 'cloudinary-live-stream'
+import initLiveStream from 'cloudinary@/js-streaming'
 
 // ...
 

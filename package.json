@@ -1,22 +1,25 @@
 {
   "author": "Cloudinary <info@cloudinary.com>",
-  "name": "cloudinary-live-stream",
-  "description": "Cloudinary NPM for integrating live video streaming",
+  "name": "@cloudinary/js-streaming",
+  "description": "Cloudinary client-side package for live video streaming",
   "homepage": "http://cloudinary.com",
   "license": "MIT",
   "version": "1.0.0-beta.1",
-  "main": "dist/cloudinary-live-stream.js",
+  "main": "dist/js-streaming.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
     "test": "npm run server & node_modules/.bin/mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
     "pretest": "npm run build && npm run copybuild",
-    "posttest": "del-cli test/utils/cloudinary-live-stream.js",
-    "copybuild": "copyfiles -f \"dist/cloudinary-live-stream.js\" \"test/utils\" && echo 'build files copied.'\n",
+    "posttest": "del-cli test/utils/js-streaming.js",
+    "copybuild": "copyfiles -f \"dist/js-streaming.js\" \"test/utils\" && echo 'build files copied.'\n",
     "server": "http-server test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cloudinary/cloudinary-live-stream-js.git"
+    "url": "https://github.com/cloudinary/cloudinary-js-streaming.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cloudinary/cloudinary-js-streaming/issues"
   },
   "dependencies": {
     "es6-promise": "^4.2.8",
@@ -42,5 +45,6 @@
     "dist/cloudinary-live-stream.js",
     "dist/cloudinary-live-stream.js.map"
   ],
+  "keywords": ["cloudinary", "streaming", "live", "video"],
   "private": false
 }

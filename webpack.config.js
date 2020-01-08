@@ -7,8 +7,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'cloudinary-live-stream.js',
-    library: 'cloudinaryLiveStream',
+    filename: 'js-streaming.js',
+    library: 'cloudinaryJsStreaming',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     globalObject: `(typeof self !== 'undefined' ? self : this)`
