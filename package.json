@@ -4,7 +4,7 @@
   "description": "Cloudinary client-side package for live video streaming",
   "homepage": "http://cloudinary.com",
   "license": "MIT",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "main": "dist/js-streaming.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
