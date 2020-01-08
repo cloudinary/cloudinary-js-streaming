@@ -12,7 +12,7 @@
     "pretest": "npm run build && npm run copybuild",
     "posttest": "del-cli test/utils/js-streaming.js",
     "copybuild": "copyfiles -f \"dist/js-streaming.js\" \"test/utils\" && echo 'build files copied.'\n",
-    "server": "http-server test"
+    "server": "http-server -p 9876 test"
   },
   "repository": {
     "type": "git",

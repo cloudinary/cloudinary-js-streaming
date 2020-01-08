@@ -10,7 +10,7 @@ describe('Live Stream SDK', async () => {
       page.on('console', consoleMessage => console.log(consoleMessage.text()));
 
       // Load test/index.html
-      await page.goto('http://localhost:8080');
+      await page.goto('http://localhost:9876');
 
       // Try to initialize live streaming inside the loaded page
       // options is exposed to the page scope by passing it as parameter to the page.evaluate()
