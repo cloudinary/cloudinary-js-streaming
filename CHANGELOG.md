@@ -1,3 +1,10 @@
+
+ 1.0.1 / 2020-01-12
+===================
+
+  * Export library as object
+  * Add vanilla js example
+
 1.0.0 / 2020-01-08
 =========================
   * Update npm package to be @cloudinary/js-streaming
