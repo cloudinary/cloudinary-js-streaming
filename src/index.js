@@ -317,4 +317,4 @@ const initLiveStream = (options) => {
   }
 };
 
-export default initLiveStream;
+export {initLiveStream};

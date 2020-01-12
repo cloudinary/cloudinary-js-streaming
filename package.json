@@ -12,7 +12,7 @@
     "pretest": "npm run build && npm run copybuild",
     "posttest": "del-cli test/utils/js-streaming.js",
     "copybuild": "copyfiles -f \"dist/js-streaming.js\" \"test/utils\" && echo 'build files copied.'\n",
-    "server": "node_modules/.bin/http-server -p 9877 test"
+    "server": "node test/utils/server.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "copyfiles": "^2.1.1",
     "del-cli": "^3.0.0",
     "exports-loader": "^0.7.0",
+    "express": "^4.17.1",
     "http-server": "^0.12.0",
     "mocha": "^6.2.2",
     "puppeteer": "^2.0.0",

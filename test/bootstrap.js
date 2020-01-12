@@ -18,8 +18,15 @@ before (async function () {
 
 // close browser and reset global variables
 after (async function () {
+  let page = await global.browser.newPage();
+
+  // Print page's console events
+  page.on('console', consoleMessage => console.log(consoleMessage.text()));
+
+  page.goto('http://localhost:9880/stop').then(async ()=>{
     await global.browser.close();
 
     global.browser = globalVariables.browser;
     global.expect = globalVariables.expect;
+  });
 });

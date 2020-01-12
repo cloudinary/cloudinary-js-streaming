@@ -10,7 +10,7 @@ describe('Live Stream SDK', async () => {
       page.on('console', consoleMessage => console.log(consoleMessage.text()));
 
       // Load test/index.html
-      await page.goto('http://localhost:9877');
+      await page.goto('http://localhost:9880');
 
       // Try to initialize live streaming inside the loaded page
       // options is exposed to the page scope by passing it as parameter to the page.evaluate()
@@ -18,7 +18,7 @@ describe('Live Stream SDK', async () => {
         // initLiveStream is exported as default on the cloudinaryLiveStream library
         let result, isResultOk;
 
-        const initLiveStream = cloudinaryJsStreaming.default;
+        const {initLiveStream} = cloudinaryJsStreaming;
         try {
           result = await initLiveStream(options);
         }
