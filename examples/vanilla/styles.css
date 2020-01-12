@@ -1,0 +1,41 @@
+.container {
+    max-width: 600px;
+}
+
+.info {
+    height: 400px;
+}
+
+.ui {
+    text-align: left;
+    height: 400px;
+}
+
+.wrapper {
+    display: inline-block;
+}
+
+.video-wrapper {
+    width: 320px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.video {
+    width: 100%;
+    border: 5px solid black;
+}
+
+.recording {
+    border: 5px solid red;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
