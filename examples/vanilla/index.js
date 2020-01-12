@@ -1,4 +1,4 @@
-const initLiveStream = cloudinaryJsStreaming.initLiveStream || cloudinaryJsStreaming.default;
+const {initLiveStream} = cloudinaryJsStreaming;
 const CLOUD_NAME = 'demo-live';
 const UPLOAD_PRESET = 'live-stream';
 let liveStream, publicId, url;
