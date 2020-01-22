@@ -1,4 +1,4 @@
-const {initLiveStream} = cloudinaryJsStreaming;
+const {initLiveStream, attachCamera, detachCamera} = cloudinaryJsStreaming;
 const CLOUD_NAME = 'demo-live';
 const UPLOAD_PRESET = 'live-stream';
 let liveStream, publicId, url;
@@ -32,6 +32,14 @@ function setUrl(url) {
   file_link.innerText = fileUrl;
   stream_link.href = streamUrl;
   stream_link.innerText = streamUrl;
+}
+
+function view(){
+  attachCamera(document.getElementById("video"));
+}
+
+function hide(){
+  detachCamera(document.getElementById("video"));
 }
 
 function start() {

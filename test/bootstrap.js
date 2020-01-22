@@ -7,6 +7,7 @@ const opts = {
   headless: true,
   slowMo: 100,
   timeout: 20000,
+  args: ['--use-fake-ui-for-media-stream'] //skip a prompt of getUserMedia
 };
 
 // expose variables
