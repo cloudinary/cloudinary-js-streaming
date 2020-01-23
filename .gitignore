@@ -9,3 +9,4 @@ dist
 *.map
 !lib
 package-lock.json
+/examples/vanilla/js-streaming.js

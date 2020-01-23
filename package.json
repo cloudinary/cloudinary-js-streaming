@@ -8,9 +8,12 @@
   "main": "dist/js-streaming.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
-    "test": "npm run server & node_modules/.bin/mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
+    "test": "npm run server & mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
     "pretest": "npm run build && npm run copybuild",
     "posttest": "del-cli test/utils/js-streaming.js",
+    "test:with-camera": "npm run server & env WITH_CAMERA=true mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
+    "pretest:with-camera": "npm run pretest",
+    "posttest:with-camera": "npm run posttest",
     "copybuild": "copyfiles -f \"dist/js-streaming.js\" \"test/utils\" && echo 'build files copied.'\n",
     "server": "node test/utils/server.js"
   },
@@ -22,7 +25,6 @@
     "url": "https://github.com/cloudinary/cloudinary-js-streaming/issues"
   },
   "dependencies": {
-    "es6-promise": "^4.2.8",
     "janus-gateway": "git://github.com/meetecho/janus-gateway.git#v0.8.0",
     "whatwg-fetch": "^3.0.0"
   },
@@ -31,6 +33,7 @@
     "@babel/core": "^7.7.5",
     "@babel/preset-env": "^7.7.6",
     "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "copyfiles": "^2.1.1",

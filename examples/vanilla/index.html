@@ -5,6 +5,8 @@
     <title>Cloudinary Live Streaming Example</title>
     <link href="./styles.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/@cloudinary/js-streaming/dist/js-streaming.js"></script>
+    <!--Use this script for local build: -->
+    <!--<script src="js-streaming.js"></script>-->
 </head>
 
 <body class="center-text">
@@ -15,9 +17,13 @@
     </div>
     <div class="center">
         <div class="center-text">
-            <button id="initbtn" onclick="initialize();">initialize stream</button>
-            <button disabled id="startbtn" onclick="start();">start stream</button>
-            <button disabled id="stopbtn" onclick="stop();">stop stream</button>
+            <button id="viewbtn" onclick="view();">Show camera</button>
+            <button id="hidebtn" onclick="hide();">Hide camera</button>
+        </div>
+        <div class="center-text">
+            <button id="initbtn" onclick="initialize();">Initialize stream</button>
+            <button disabled id="startbtn" onclick="start();">Start stream</button>
+            <button disabled id="stopbtn" onclick="stop();">Stop stream</button>
         </div>
 
         <div class="ui">
