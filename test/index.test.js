@@ -197,7 +197,6 @@ describe('Live Stream SDK', async () => {
             return new Promise(function (resolve, reject) {
               setTimeout(() => {
                 try {
-                  console.log('resolving');
                   resolve(func());
                 } catch (e) {
                   reject(e);

@@ -25,7 +25,6 @@
     "url": "https://github.com/cloudinary/cloudinary-js-streaming/issues"
   },
   "dependencies": {
-    "@babel/runtime": "^7.8.3",
     "janus-gateway": "git://github.com/meetecho/janus-gateway.git#v0.8.0",
     "whatwg-fetch": "^3.0.0"
   },
