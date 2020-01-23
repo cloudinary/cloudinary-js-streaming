@@ -4,11 +4,14 @@ const presets = [
   ],
 ];
 
+/*
+// If we ever want to add async support:
 const plugins = [
   ["@babel/plugin-transform-runtime", {
     "regenerator": true
   }]
 ];
+*/
 
-module.exports = { presets, plugins};
+module.exports = { presets };
 

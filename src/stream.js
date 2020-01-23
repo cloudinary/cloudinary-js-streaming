@@ -1,5 +1,4 @@
 //import Janus from "./janus";
-import 'es6-promise'
 import 'whatwg-fetch'
 
 //Use an external janus.
@@ -50,7 +49,6 @@ const buildRequest = (options) => {
 /**
  * Initializes the live video stream
  *
- * @private
  * @param {object} options Configuration options
  * @param {string} options.cloudName (required) The cloud name of the account for upstream
  * @param {string} options.uploadPreset (required) Upload preset for video upload (with live stream enabled)
