@@ -1,3 +1,15 @@
+1.1.0 / 2020-01-26
+==================
+
+New functionality
+-----------------
+* Add attachCamera and detachCamera functions
+* Add Streamer - a convenient wrapper for camera and streaming functions
+
+Other changes
+-------------
+* Add minified production build
+
 
  1.0.1 / 2020-01-12
 ===================
