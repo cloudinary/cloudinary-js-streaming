@@ -35,11 +35,15 @@ function setUrl(url) {
 }
 
 function view(){
-  attachCamera(document.getElementById("video"));
+  attachCamera(document.getElementById("video")).then(c=>{
+    console.log(c);
+  })
 }
 
 function hide(){
-  detachCamera(document.getElementById("video"));
+  detachCamera(document.getElementById("video")).then(c=>{
+    console.log(c);
+  })
 }
 
 function start() {

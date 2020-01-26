@@ -10,13 +10,14 @@
  */
 const attachCamera = (videoElement, facingMode) => {
   return new Promise((resolve, reject) => {
-    try {
-      const options = facingMode ? {video: {facingMode}} : {video: true};
-      const stream = navigator.mediaDevices.getUserMedia(options);
+    const options = facingMode ? {video: {facingMode}} : {video: true};
+    navigator.mediaDevices.getUserMedia(options).then(stream => {
+      videoElement.srcObject = stream;
       resolve(stream);
-    } catch (e) {
-      reject(e)
-    }
+    })
+      .catch(e => {
+        reject(e)
+      });
   });
 };
 
