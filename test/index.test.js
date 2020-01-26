@@ -1,6 +1,8 @@
 const {expect} = require('chai');
 const {options} = require('./initOptions');
 
+const environments = [{env: 'Development', url: 'http://localhost:9880/dev.html'}, {env: 'Production', url: 'http://localhost:9880/prod.html'}];
+
 const printErrors = async msg => {
   const args = await msg.args();
   args.forEach(async (arg) => {
@@ -17,111 +19,8 @@ const printErrors = async msg => {
 
 const printErrorText = consoleMessage => console.log(consoleMessage.text());
 
-describe('Live Stream SDK', async () => {
-  it(`initLiveStream`, async () => {
-    // Create new page
-    page = await browser.newPage();
-
-    // Print page's console events
-    page.on('console', printErrorText);
-
-    // Load test/index.html
-    await page.goto('http://localhost:9880');
-
-    // Try to initialize live streaming inside the loaded page
-    // options is exposed to the page scope by passing it as parameter to the page.evaluate()
-    let actual = await page.evaluate(async options => {
-      // initLiveStream is exported as default on the cloudinaryLiveStream library
-      let result, isResultOk;
-
-      const {initLiveStream} = cloudinaryJsStreaming;
-      try {
-        result = await initLiveStream(options);
-      } catch (e) {
-        result = e;
-      }
-
-      isResultOk = result && result.response && result.response.public_id;
-      return isResultOk ? "initialized" : result;
-    }, options);
-
-    expect(actual).to.equal("initialized");
-  });
-  if (process.env.WITH_CAMERA) {
-    it(`attachCamera`, async () => {
-
-      // Create new page
-      page = await browser.newPage();
-
-      // Print page's console events
-      page.on('console', printErrors);
-      // Load test/index.html
-      await page.goto('http://localhost:9880');
-
-      // Try to initialize live streaming inside the loaded page
-      // options is exposed to the page scope by passing it as parameter to the page.evaluate()
-      let actual = await page.evaluate(async () => {
-        // initLiveStream is exported as default on the cloudinaryLiveStream library
-        let isError = false;
-
-        const {attachCamera} = cloudinaryJsStreaming;
-        try {
-          await attachCamera(document.getElementById("video"));
-        } catch (e) {
-          isError = e;
-        }
-
-        return isError;
-      });
-
-      expect(actual).to.equal(false);
-    });
-    it(`detachCamera`, async () => {
-      // Create new page
-      page = await browser.newPage();
-
-      // Print page's console events
-      page.on('console', printErrors);
-      // Load test/index.html
-      await page.goto('http://localhost:9880');
-
-      // Try to initialize live streaming inside the loaded page
-      // options is exposed to the page scope by passing it as parameter to the page.evaluate()
-      let actual = await page.evaluate(async () => {
-        const promisedTimeout = (func, milliseconds) => {
-          return new Promise(function (resolve, reject) {
-            setTimeout(() => {
-              try {
-                console.log('resolving');
-                resolve(func());
-              } catch (e) {
-                reject(e);
-              }
-            }, milliseconds);
-          });
-        };
-
-        // initLiveStream is exported as default on the cloudinaryLiveStream library
-        let isError = false;
-
-        const {attachCamera, detachCamera} = cloudinaryJsStreaming;
-        try {
-          let video = document.getElementById("video");
-          await attachCamera(video);
-          await promisedTimeout(() => detachCamera(video), 3000);
-        } catch (e) {
-
-          console.log(e);
-          isError = e;
-        }
-
-        return isError;
-      });
-
-      expect(actual).to.equal(false);
-    });
-  }
-  describe('Streamer', async () => {
+environments.forEach(({env, url}) => {
+  describe(`Live Stream SDK: ${env}`, async () => {
     it(`initLiveStream`, async () => {
       // Create new page
       page = await browser.newPage();
@@ -130,7 +29,7 @@ describe('Live Stream SDK', async () => {
       page.on('console', printErrorText);
 
       // Load test/index.html
-      await page.goto('http://localhost:9880');
+      await page.goto(url);
 
       // Try to initialize live streaming inside the loaded page
       // options is exposed to the page scope by passing it as parameter to the page.evaluate()
@@ -138,9 +37,9 @@ describe('Live Stream SDK', async () => {
         // initLiveStream is exported as default on the cloudinaryLiveStream library
         let result, isResultOk;
 
-        const {Streamer} = cloudinaryJsStreaming;
+        const {initLiveStream} = cloudinaryJsStreaming;
         try {
-          result = await Streamer.initLiveStream(options);
+          result = await initLiveStream(options);
         } catch (e) {
           result = e;
         }
@@ -160,7 +59,7 @@ describe('Live Stream SDK', async () => {
         // Print page's console events
         page.on('console', printErrors);
         // Load test/index.html
-        await page.goto('http://localhost:9880');
+        await page.goto(url);
 
         // Try to initialize live streaming inside the loaded page
         // options is exposed to the page scope by passing it as parameter to the page.evaluate()
@@ -168,10 +67,9 @@ describe('Live Stream SDK', async () => {
           // initLiveStream is exported as default on the cloudinaryLiveStream library
           let isError = false;
 
-          const {Streamer} = cloudinaryJsStreaming;
-          const streamer = new Streamer(document.getElementById("video"));
+          const {attachCamera} = cloudinaryJsStreaming;
           try {
-            await streamer.attachCamera();
+            await attachCamera(document.getElementById("video"));
           } catch (e) {
             isError = e;
           }
@@ -188,7 +86,7 @@ describe('Live Stream SDK', async () => {
         // Print page's console events
         page.on('console', printErrors);
         // Load test/index.html
-        await page.goto('http://localhost:9880');
+        await page.goto(url);
 
         // Try to initialize live streaming inside the loaded page
         // options is exposed to the page scope by passing it as parameter to the page.evaluate()
@@ -197,6 +95,7 @@ describe('Live Stream SDK', async () => {
             return new Promise(function (resolve, reject) {
               setTimeout(() => {
                 try {
+                  console.log('resolving');
                   resolve(func());
                 } catch (e) {
                   reject(e);
@@ -208,12 +107,11 @@ describe('Live Stream SDK', async () => {
           // initLiveStream is exported as default on the cloudinaryLiveStream library
           let isError = false;
 
-          const {Streamer} = cloudinaryJsStreaming;
-          const streamer = new Streamer(document.getElementById("video"));
-
+          const {attachCamera, detachCamera} = cloudinaryJsStreaming;
           try {
-            await streamer.attachCamera();
-            await promisedTimeout(() => streamer.detachCamera(), 3000);
+            let video = document.getElementById("video");
+            await attachCamera(video);
+            await promisedTimeout(() => detachCamera(video), 3000);
           } catch (e) {
 
             console.log(e);
@@ -226,5 +124,111 @@ describe('Live Stream SDK', async () => {
         expect(actual).to.equal(false);
       });
     }
+    describe('Streamer', async () => {
+      it(`initLiveStream`, async () => {
+        // Create new page
+        page = await browser.newPage();
+
+        // Print page's console events
+        page.on('console', printErrorText);
+
+        // Load test/index.html
+        await page.goto(url);
+
+        // Try to initialize live streaming inside the loaded page
+        // options is exposed to the page scope by passing it as parameter to the page.evaluate()
+        let actual = await page.evaluate(async options => {
+          // initLiveStream is exported as default on the cloudinaryLiveStream library
+          let result, isResultOk;
+
+          const {Streamer} = cloudinaryJsStreaming;
+          try {
+            result = await Streamer.initLiveStream(options);
+          } catch (e) {
+            result = e;
+          }
+
+          isResultOk = result && result.response && result.response.public_id;
+          return isResultOk ? "initialized" : result;
+        }, options);
+
+        expect(actual).to.equal("initialized");
+      });
+      if (process.env.WITH_CAMERA) {
+        it(`attachCamera`, async () => {
+
+          // Create new page
+          page = await browser.newPage();
+
+          // Print page's console events
+          page.on('console', printErrors);
+          // Load test/index.html
+          await page.goto(url);
+
+          // Try to initialize live streaming inside the loaded page
+          // options is exposed to the page scope by passing it as parameter to the page.evaluate()
+          let actual = await page.evaluate(async () => {
+            // initLiveStream is exported as default on the cloudinaryLiveStream library
+            let isError = false;
+
+            const {Streamer} = cloudinaryJsStreaming;
+            const streamer = new Streamer(document.getElementById("video"));
+            try {
+              await streamer.attachCamera();
+            } catch (e) {
+              isError = e;
+            }
+
+            return isError;
+          });
+
+          expect(actual).to.equal(false);
+        });
+        it(`detachCamera`, async () => {
+          // Create new page
+          page = await browser.newPage();
+
+          // Print page's console events
+          page.on('console', printErrors);
+          // Load test/index.html
+          await page.goto(url);
+
+          // Try to initialize live streaming inside the loaded page
+          // options is exposed to the page scope by passing it as parameter to the page.evaluate()
+          let actual = await page.evaluate(async () => {
+            const promisedTimeout = (func, milliseconds) => {
+              return new Promise(function (resolve, reject) {
+                setTimeout(() => {
+                  try {
+                    resolve(func());
+                  } catch (e) {
+                    reject(e);
+                  }
+                }, milliseconds);
+              });
+            };
+
+            // initLiveStream is exported as default on the cloudinaryLiveStream library
+            let isError = false;
+
+            const {Streamer} = cloudinaryJsStreaming;
+            const streamer = new Streamer(document.getElementById("video"));
+
+            try {
+              await streamer.attachCamera();
+              await promisedTimeout(() => streamer.detachCamera(), 3000);
+            } catch (e) {
+
+              console.log(e);
+              isError = e;
+            }
+
+            return isError;
+          });
+
+          expect(actual).to.equal(false);
+        });
+      }
+    });
   });
 });
