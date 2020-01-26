@@ -6,15 +6,16 @@
   "license": "MIT",
   "version": "1.0.1",
   "main": "dist/js-streaming.js",
+  "private": false,
   "scripts": {
-    "build": "node_modules/.bin/webpack",
+    "build": "webpack --config webpack.dev.js && webpack --config webpack.prod.js",
     "test": "npm run server & mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
     "pretest": "npm run build && npm run copybuild",
-    "posttest": "del-cli test/utils/js-streaming.js",
+    "posttest": "del-cli test/utils/js-streaming*.js",
     "test:with-camera": "npm run server & env WITH_CAMERA=true mocha test/bootstrap.js --recursive  \"test/**/*.test.js\" --timeout 20000",
     "pretest:with-camera": "npm run pretest",
     "posttest:with-camera": "npm run posttest",
-    "copybuild": "copyfiles -f \"dist/js-streaming.js\" \"test/utils\" && echo 'build files copied.'\n",
+    "copybuild": "copyfiles -f \"dist/*.js\" \"test/utils\" && echo 'build files copied.'\n",
     "server": "node test/utils/server.js"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "clean-webpack-plugin": "^3.0.0",
     "copyfiles": "^2.1.1",
     "del-cli": "^3.0.0",
     "exports-loader": "^0.7.0",
@@ -44,17 +46,19 @@
     "mocha": "^6.2.2",
     "puppeteer": "^2.0.0",
     "webpack": "^4.41.3",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2"
   },
   "files": [
-    "dist/cloudinary-live-stream.js",
-    "dist/cloudinary-live-stream.js.map"
+    "dist/js-streaming.js",
+    "dist/js-streaming.js.map",
+    "dist/js-streaming.min.js",
+    "dist/js-streaming.min.js.map"
   ],
   "keywords": [
     "cloudinary",
     "streaming",
     "live",
     "video"
-  ],
-  "private": false
+  ]
 }
