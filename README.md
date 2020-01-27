@@ -32,6 +32,9 @@ the ****live-streaming**** setting. This is also the place to add any wanted eff
 
 ## Usage ######################################################################
 
+### Streaming #################################################################
+
+
 After completing the setup, import the library and initialize it. There are two required parameters:
 * cloudName - this is the cloud name assigned to you when creating the Cloudinary free account.
 * uploadPreset - This is the name of the upload preset created in step two of the setup.
@@ -99,6 +102,46 @@ initLiveStream({
   // start the streaming:
   liveStreamLibrary.start(publicId);
 })
+```
+
+### Camera Control ###############################################################
+The live streaming sdk contains some convenient camera functions:
+* attachCamera: Show camera in an html <video> element.
+* detachCamera - Remove camera from an html <video> element.
+* Streamer - a convenient wrapper for camera and streaming functions,
+it exposes functions for showing, hiding and streaming from a camera.
+
+#### attachCamera & detachCamera ################################################################
+```javascript
+import {attachCamera, detachCamera} from '@cloudinary/js-streaming';
+const video = document.getElementById("video");
+const facingMode =  { exact: "user" };
+
+// Show camera in an html <video> element
+// facingMode is optional
+attachCamera(video, facingMode).then(stream=>console.log(stream));
+
+// Remove camera from an html <video> element
+detachCamera(video).then(videoElement=>console.log(videoElement));
+```
+
+#### Streamer ################################################################
+```javascript
+import {Streamer} from '@cloudinary/js-streaming';
+const video = document.getElementById("video");
+const facingMode =  { exact: "user" };
+const liveStreamOptions = {};
+const streamer = new Streamer(video);
+
+// Show camera in an html <video> element
+// facingMode is optional
+streamer.attachCamera(facingMode).then(stream=>console.log(stream));
+
+// Remove camera from an html <video> element
+streamer.detachCamera().then(videoElement=>console.log(videoElement));
+
+// Initialize live-streaming using streaming configuration object
+streamer.initLiveStream(liveStreamOptions).then(result => console.log(result));
 ```
 
 ## Additional resources ##########################################################
