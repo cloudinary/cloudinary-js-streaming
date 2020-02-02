@@ -24,15 +24,15 @@ const attachCamera = (videoElement, facingMode) => {
 /**
  * Detach camera from an html video element
  * @param videoElement - The video element to detach the camera from
+ * @param stopStream - (true by default) when true will stop all stream tracks
  */
-const detachCamera = (videoElement) => {
+const detachCamera = (videoElement, stopStream = true) => {
   return new Promise((resolve, reject) => {
     try {
-      const stream = videoElement.srcObject;
-      if (stream) {
-        const tracks = stream.getTracks();
-
-        tracks.forEach(track => track.stop);
+      if (videoElement.srcObject) {
+        if (stopStream) {
+          videoElement.srcObject.getTracks().forEach(track => track.stop());
+        }
         videoElement.srcObject = null;
       }
       resolve(videoElement)
