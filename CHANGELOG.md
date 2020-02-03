@@ -1,3 +1,10 @@
+1.2.0 / 2020-02-03
+==================
+
+New functionality
+-----------------
+* Add optional stopStream param to detachCamera(videoElement, stopStream)
+
 1.1.0 / 2020-01-26
 ==================
 
