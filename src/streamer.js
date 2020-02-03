@@ -18,7 +18,7 @@ class Streamer {
    * Set this Streamer's html video element
    * @param videoElement - reference to an html video element
    */
-  setVideoElement(videoElement){
+  setVideoElement(videoElement) {
     this.videoElement = videoElement;
   }
 
@@ -33,9 +33,10 @@ class Streamer {
 
   /**
    * Detach camera from this Streamer's html video element
+   * @param stopStream - (true by default) when true will stop all stream tracks
    */
-  detachCamera() {
-    return detachCamera(this.videoElement);
+  detachCamera(stopStream = true) {
+    return detachCamera(this.videoElement, stopStream);
   }
 
   /**
