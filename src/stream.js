@@ -152,7 +152,7 @@ const initLiveStream = (options) => {
    * @param {string} publicId The public id of the video resource generated. This is the public-id returned from the
    * initLiveStream function.
    */
-  let start = function (publicId) {
+  let start = function (publicId, stream) {
     // before, after, during recording
     cld.send({
       "message": {
@@ -166,6 +166,7 @@ const initLiveStream = (options) => {
       {
         // By default, it's sendrecv for audio and video...
         media: {video: "hires"},
+        stream: stream,
         success: function (jsep) {
           Janus.debug("Got SDP!");
           Janus.debug(jsep);
