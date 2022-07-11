@@ -2,7 +2,7 @@
  * Options passed to initLiveStream()
  */
 
-const {STREAMING_SDK_CLOUD_NAME, STREAMING_SDK_UPLOAD_PRESET} = process.env;
+const {STREAMING_SDK_CLOUD_NAME='demo-live', STREAMING_SDK_UPLOAD_PRESET='live-stream'} = process.env;
 
 const options = {
     hlsTarget: true,
