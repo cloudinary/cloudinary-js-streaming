@@ -7,6 +7,4 @@ addons:
 matrix:
   include:
     - node_js: "12"
-      script: npm run quickstart && npm run test
     - node_js: "14"
-      script: npm run quickstart && npm run test
