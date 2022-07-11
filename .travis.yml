@@ -1,5 +1,6 @@
 #before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 language: node_js
-node_js: "14"
+node_js:
+  - 12
 env:
   - TEST_SUBJECT=dist
