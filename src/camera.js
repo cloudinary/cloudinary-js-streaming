@@ -1,3 +1,6 @@
+export const REAR_CAMERA = {audio: true, video: { facingMode: "environment" } };
+export const FRONT_CAMERA = {audio: true, video: { facingMode: "user" } };
+
 /**
  * Attach camera to an html video element
  * Uses the navigator.mediaDevices.getUserMedia method.
@@ -8,17 +11,17 @@
  * Or rejects with an Error.
  * Read more here: https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
  */
-const attachCamera = (videoElement, facingMode) => {
-  return new Promise((resolve, reject) => {
-    const options = facingMode ? {video: {facingMode}} : {video: true};
-    navigator.mediaDevices.getUserMedia(options).then(stream => {
-      videoElement.srcObject = stream;
-      resolve(stream);
-    })
-      .catch(e => {
-        reject(e)
-      });
-  });
+export const attachCamera = async (videoElement, facingMode) => {
+  const stream = await getStream({video: facingMode || true});
+  attachStream(videoElement, stream);
+};
+
+export const attachStream = (videoElement, stream) => {
+  videoElement.srcObject = stream;
+};
+
+export const getStream = (options) => {
+    return navigator.mediaDevices.getUserMedia(options || {video: true, audio: true});
 };
 
 /**
@@ -26,7 +29,7 @@ const attachCamera = (videoElement, facingMode) => {
  * @param videoElement - The video element to detach the camera from
  * @param stopStream - (true by default) when true will stop all stream tracks
  */
-const detachCamera = (videoElement, stopStream = true) => {
+export const detachCamera = (videoElement, stopStream = true) => {
   return new Promise((resolve, reject) => {
     try {
       if (videoElement.srcObject) {
@@ -42,4 +45,10 @@ const detachCamera = (videoElement, stopStream = true) => {
   });
 };
 
-export {attachCamera, detachCamera};
+/**
+ * List cameras and microphones
+ * @returns {Promise<MediaDeviceInfo[]>}
+ */
+export const listDevices = () => {
+  return navigator.mediaDevices.enumerateDevices();
+};

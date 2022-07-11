@@ -1,6 +1,7 @@
-const {initLiveStream, attachCamera, detachCamera} = cloudinaryJsStreaming;
+const {listDevices, initLiveStream, attachCamera, detachCamera, getStream} = cloudinaryJsStreaming;
 const CLOUD_NAME = 'demo-live';
 const UPLOAD_PRESET = 'live-stream';
+
 let liveStream, publicId, url;
 
 function setText(id, text) {
@@ -35,9 +36,12 @@ function setUrl(url) {
 }
 
 function view(){
-  attachCamera(document.getElementById("video")).then(c=>{
+  const videoElement = document.getElementById("video");
+  const device = { deviceId: getSelectedCamera() };
+
+  attachCamera(videoElement, device).then(c=>{
     console.log(c);
-  })
+  });
 }
 
 function hide(){
@@ -59,13 +63,15 @@ function stop() {
 }
 
 // call initLiveStream with the configuration parameters:
-function initialize() {
+async function initialize() {
   setStatus("initializing...");
   toggleBtns();
+  const cameraStream = await getSelectedCameraStream();
 
   initLiveStream({
     cloudName: CLOUD_NAME,
     uploadPreset: UPLOAD_PRESET,
+    stream: cameraStream,
     debug: "all",
     hlsTarget: true,
     fileTarget: true,
@@ -96,12 +102,59 @@ function initialize() {
 
     // Extract public id and url from result (publish the url for people to watch the stream):
     publicId = result.response.public_id;
-    url = 'https://res.cloudinary.com/demo-live/video/upload/' + publicId;
+    url = `https://res.cloudinary.com/${CLOUD_NAME}/video/upload/${publicId}`;
 
     setStatus("initialized");
     setText("publicid", publicId);
     setUrl(url);
 
     toggleBtns(false, true, false);
+  }).catch(e => {
+    setStatus("" + e);
   });
 }
+
+function getSelectedCamera(){
+  return document.getElementById('devices').value;
+}
+
+function getSelectedCameraStream(){
+  const deviceId = getSelectedCamera();
+  if (deviceId) {
+    return getStream({video: {deviceId}});
+  }
+
+  return getStream();
+}
+
+/**
+ * Get user permission to access devices
+ * @returns {Promise<MediaStream>}
+ */
+function getUserMediaPermission(){
+  return navigator.mediaDevices.getUserMedia({video: true, audio: true});
+}
+
+function addCameraOption(device){
+  if (device.kind.includes('video')) {
+    const devicesDropDown = document.getElementById('devices');
+    const opt = document.createElement('option');
+    opt.value = device.deviceId;
+    opt.innerHTML = device.label || 'unknown';
+    devicesDropDown.appendChild(opt);
+  }
+}
+
+/**
+ * Fill camera <select> with video devices
+ */
+function fillCameraDropdown() {
+  getUserMediaPermission().then(() => {
+    listDevices().then((devices) => devices.forEach(addCameraOption));
+  }).catch(() => {
+    console.error('Could not get user media devices.');
+  });
+}
+
+// When DOM loaded, Fill camera <select> with video devices
+document.addEventListener("DOMContentLoaded", fillCameraDropdown);

@@ -33,8 +33,6 @@ the ****live-streaming**** setting. This is also the place to add any wanted eff
 ## Usage ######################################################################
 
 ### Streaming #################################################################
-
-
 After completing the setup, import the library and initialize it. There are two required parameters:
 * cloudName - this is the cloud name assigned to you when creating the Cloudinary free account.
 * uploadPreset - This is the name of the upload preset created in step two of the setup.
@@ -71,29 +69,28 @@ let liveStreamLibrary;
 // call initLiveStream with the configuration parameters:
 initLiveStream({
  cloudName: cloudName,
-            uploadPreset: uploadPreset,
-            debug: "all",
-            hlsTarget: true,
-            fileTarget: true,
-            events: {
-                start: function (args) {
-                  // user code
-                },
-                stop: function (args) {
-                  // user code
-                },
-                error: function(error){
-                  // user code
-                },
-                local_stream: function (stream) {
-                  // user code, typically attaching the stream to a video view:
-                  liveStreamLibrary.attach($("#thevideo").get(0), stream);
-                }
-            }
+ uploadPreset: uploadPreset,
+ debug: "all",
+ hlsTarget: true,
+ fileTarget: true,
+ events: {
+   start: function (args) {
+     // user code
+   },
+   stop: function (args) {
+     // user code
+   },
+   error: function(error){
+     // user code
+   },
+   local_stream: function (stream) {
+     // user code, typically attaching the stream to a video view:
+     liveStreamLibrary.attach($("#thevideo").get(0), stream);
+   }
+ }
 }).then((result) => {
   // keep handle to instance to start/stop streaming 
   liveStreamLibrary = result;
-  
   
   // Extract public id and url from result (publish the url for people to watch the stream):
   let publicId = result.response.public_id;
@@ -103,6 +100,32 @@ initLiveStream({
   liveStreamLibrary.start(publicId);
 })
 ```
+
+#### Select device to stream from ################################################################
+```javascript
+import {getStream, FRONT_CAMERA, REAR_CAMERA} from '@cloudinary/js-streaming';
+
+// Get front camera stream
+getStream(FRONT_CAMERA).then((stream)=>{})
+
+// Get rear camera stream
+getStream(REAR_CAMERA).then((stream)=>{})
+
+// Get custom device stream
+getStream({audio: true, video: { facingMode: "user" } }).then((stream)=>{})
+
+// Select device to stream from by passing the stream to initLiveStream()
+getStream(FRONT_CAMERA).then((stream)=> {
+  initLiveStream({cloudName, uploadPreset, stream, ...});
+});
+```
+
+### Streaming Devices ####################################################
+The live streaming sdk contains some convenient helper functions and constants:
+* listDevices - get list of streaming devices.
+* getStream - get stream from device.
+* FRONT_CAMERA - pass this to getStream() in order to get stream from the front camera.
+* REAR_CAMERA - pass this to getStream() in order to get stream from the rear camera.
 
 ### Camera Control ###############################################################
 The live streaming sdk contains some convenient camera functions:

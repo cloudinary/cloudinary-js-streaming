@@ -4,18 +4,25 @@
 <head>
     <title>Cloudinary Live Streaming Example</title>
     <link href="./styles.css" rel="stylesheet" type="text/css">
-    <script src="https://unpkg.com/@cloudinary/js-streaming/dist/js-streaming.js"></script>
+    <!--<script src="https://unpkg.com/@cloudinary/js-streaming/dist/js-streaming.js"></script>-->
     <!--Use this script for local build: -->
-    <!--<script src="js-streaming.js"></script>-->
+    <script src="js-streaming.js"></script>
 </head>
 
 <body class="center-text">
 <div class="container wrapper">
     <h1>Cloudinary Live Streaming Example</h1>
+    <p>This demo requires HTTPS on some environments</p>
     <div class="video-wrapper">
         <video class="video" id="video" autoPlay muted="muted" playsInline></video>
     </div>
     <div class="center">
+        <div class="center-text">
+            <label for="devices">Select Camera:</label>
+        </div>
+        <div class="center-text">
+            <select id="devices"></select>
+        </div>
         <div class="center-text">
             <button id="viewbtn" onclick="view();">Show camera</button>
             <button id="hidebtn" onclick="hide();">Hide camera</button>

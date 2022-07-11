@@ -57,27 +57,18 @@ const buildRequest = (options) => {
  *
  * @return {object} Promise returning the initialization results (public id) and handles to start/stop the streaming.
  */
-const initLiveStream = (options) => {
+const initLiveStream = (options = {}) => {
   const opaqueId = "cld-" + Janus.randomString(12);
 
   let janus = null;
   let cld = null;
 
-  // user configurable values:
-  let cloudName = null;
-  let uploadPreset = null;
-
   let started = false;
   let recording = false;
   let recordingId = null;
-  let events = null;
-
-  options = options || {};
 
   let bandwidth = options.bandwidth || (1024 * 1024); // default bandwidth 1Mbit.
-  cloudName = options.cloudName;
-  uploadPreset = options.uploadPreset;
-  events = options.events;
+  const { cloudName, uploadPreset, events, stream } = options;
 
   const janusEventHandlers = {
     [JANUS_EVENTS.PREPARING]: (result, jsep) => {
@@ -166,6 +157,8 @@ const initLiveStream = (options) => {
       {
         // By default, it's sendrecv for audio and video...
         media: {video: "hires"},
+        // If stream exist, it's used and overrides media config above
+        stream,
         success: function (jsep) {
           Janus.debug("Got SDP!");
           Janus.debug(jsep);
