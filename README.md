@@ -103,7 +103,7 @@ initLiveStream({
 
 #### Select device to stream from ################################################################
 ```javascript
-import {getStream, FRONT_CAMERA, REAR_CAMERA} from '@cloudinary/js-streaming';
+import {getStream, initLiveStream, FRONT_CAMERA, REAR_CAMERA} from '@cloudinary/js-streaming';
 
 // Get front camera stream
 getStream(FRONT_CAMERA).then((stream)=>{})
