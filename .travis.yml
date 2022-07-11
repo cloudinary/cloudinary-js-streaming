@@ -1,7 +1,12 @@
-before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
+#before_install: if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 language: node_js
-node_js:
-  - "node"
-  - "lts/*"
 env:
   - TEST_SUBJECT=dist
+addons:
+  chrome: stable
+matrix:
+  include:
+    - node_js: "12"
+      script: npm run quickstart && npm run test
+    - node_js: "14"
+      script: npm run quickstart && npm run test
