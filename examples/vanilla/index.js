@@ -121,7 +121,7 @@ function getSelectedCamera(){
 function getSelectedCameraStream(){
   const deviceId = getSelectedCamera();
   if (deviceId) {
-    return getStream({video: {deviceId}});
+    return getStream({audio: true, video: {deviceId}});
   }
 
   return getStream();

@@ -14,6 +14,7 @@ export const FRONT_CAMERA = {audio: true, video: { facingMode: "user" } };
 export const attachCamera = async (videoElement, facingMode) => {
   const stream = await getStream({video: facingMode || true});
   attachStream(videoElement, stream);
+  return stream;
 };
 
 export const attachStream = (videoElement, stream) => {
