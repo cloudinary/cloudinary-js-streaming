@@ -38,6 +38,7 @@ After completing the setup, import the library and initialize it. There are two 
 * uploadPreset - This is the name of the upload preset created in step two of the setup.
 
 There are several optional parameters:
+* `stream`: The [MediaStream](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream) to use as the streaming source. Required only if you obtain a MediaStream object yourself with a `getUserMedia` request or the `getStream` helper function, rather than have the library get a stream from the default device by itself. 
 * `debug`: Log level (disabled by default), one of, or array of ```['trace', 'debug', 'vdebug', 'log', 'warn', 'error']```. pass in ```'all'``` to print all
  messages.
 * `bandwidth`: Bandwith, in bits. Default is 1Mbit/s (1024 * 1024).
